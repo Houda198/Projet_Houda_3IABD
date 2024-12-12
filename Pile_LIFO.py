@@ -12,38 +12,24 @@ class Pile:
             return
         #sinon j'ajoute un element et puis j'incrèmente vers l'èlèment suivant
         else:
-            self.tab[self.head] = value
+            self.tab[self.size] = value
             self.size += 1
     #je dépile des élèments
-    def pop(self, value):
-        if self.size == self.capacity :
-            return self.tab[self.head]
-        else:
-            self.tab[self.head] = value
-            self.size -= 1
+    def pop(self):
+        self.size -= 1
+        return self.tab[self.size]
 
-            return self.tab[self.head]
-
-    def display(self):
+    def display_from_top(self):
             #affichage depuis le dessus
-            for i in range(self.size):
-                i-=1
+            for i in range(self.size -1, -1, -1):
                 if self.tab[i] is not None:
-                    print("%d ", self.tab[i])
+                    print(self.tab[i])
 
+    def display_from_bottom(self):
             #affichage depuis le fond
             for i in range(self.size):
-                i+=1
                 if self.tab[i] is not None:
-                    print("%d " % self.tab[i])
-
-    def browse(self, value):
-        #je vérifie si le premier elem de la pile est nul, je retourne nul
-        if self.head is None:
-            return None
-        #sinon je retourne le 1er elem de la pile
-        else :
-            value =  self.head.value
+                    print(self.tab[i])
 
     def size(self, taille):
         #retourner la taille de la pile
@@ -56,7 +42,9 @@ ma_liste.push(2)
 ma_liste.push(1)
 ma_liste.push(3)
 ma_liste.push(5)
-ma_liste.display()
-
-ma_liste.pop(3)
-ma_liste.display()
+ma_liste.display_from_top()
+print()
+ma_liste.pop()
+ma_liste.display_from_top()
+print()
+print(ma_liste.size)
