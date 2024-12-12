@@ -1,4 +1,3 @@
-from Hashage_ouvert import hash
 class HashMap:
     def __init__(self, size):
         self.size = size
@@ -26,6 +25,32 @@ class HashMap:
                     return
                 index = (index + 1) % self.size
                 count +=1
+    def contains(self, word):
+        index = hash(word)
+        count = 0
+        while self.value [(index + count) % self.size] != "":
+            if self.value[(index + count) % self.size] == word:
+                return True
+            count += 1
+        return False
+
+    def remove(self, word):
+        index = hash(word)
+        count = 0
+        remove = False
+        while self.value [(index + count) % self.size] != "":
+            if self.value[(index + count) % self.size] == word:
+                remove = True
+                self.value[(index + count) % self.size] = ""
+                break
+            count += 1
+        if remove and self.value [(index + count + 1) % self.size] != "":
+            copy = self.value
+            self.value = ["" for _ in range(self.size)]
+            for word in copy:
+                if word != "":
+                    self.add(word)
+
 
     def display(self):
             print(self.value)
@@ -33,6 +58,10 @@ class HashMap:
 hashmap = HashMap(3)
 hashmap.add("houda")
 hashmap.add("empathic")
-hashmap.add("empathik")
+hashmap.add("empathik | laaslama  | akham ")
 hashmap.display()
-
+print(hashmap.contains("empathic"))
+hashmap.display()
+print(hashmap.contains("greenLand"))
+hashmap.remove("empathic")
+hashmap.display()
